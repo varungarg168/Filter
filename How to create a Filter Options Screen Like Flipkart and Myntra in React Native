@@ -1,0 +1,125 @@
+import * as React from 'react';
+import {StyleSheet, ScrollView, View, TouchableOpacity } from 'react-native';
+import { Text, Button } from 'react-native-elements';
+
+
+const ProductFilter = ({ route, navigation }) => {
+    // All your menu options go here. 
+    const [menuItems, setMenuItems] = React.useState([
+        { id: '1', name: 'Age', },
+        { id: '2', name: 'Brand', },
+        { id: '3', name: 'Age', },
+        { id: '4', name: 'Ideal for Viewing Distance dsfhj fdsfjj ', },
+        { id: '5', name: 'Age', },
+        { id: '6', name: 'Price', },
+        { id: '7', name: 'Age', },
+        { id: '8', name: 'Price', },
+        { id: '9', name: 'Age', },
+        { id: '10', name: 'Price', },
+        { id: '11', name: 'Age', },
+        { id: '12', name: 'Price', },
+        { id: '13', name: 'Age', },
+        { id: '14', name: 'Price', },
+        { id: '15', name: 'Age', },
+        { id: '16', name: 'Price', },
+        { id: '17', name: 'Test', },
+        { id: '18', name: 'last', },
+
+    ])
+    // this holds the keys of the menuItems for the view to know which category is currently being rendered. 
+    const [selectedItem, setSelectedItem] = React.useState('1')
+    return (
+        <>
+        
+            <View style={styles.content}>
+                <View style={styles.menuColumn}>
+                    <ScrollView contentInsetAdjustmentBehavior="automatic" showsVerticalScrollIndicator ={false} showsHorizontalScrollIndicator={false}>
+                        {menuItems.map(
+                            (item, index) => {
+                                return (
+                                    <TouchableOpacity key={item.id} onPress={() => setSelectedItem(item.id)} style={[styles.menuItem, item.id === selectedItem ? styles.selectedMenuItem : null]}>
+                                        <Text numberOfLines={2} style={styles.menuItemText}>{item.name}</Text>
+                                    </TouchableOpacity>
+                                )
+                            }
+                        )
+                        }
+                    </ScrollView>
+                </View>
+                <View style={styles.settingsColumn}>
+                <ScrollView contentInsetAdjustmentBehavior="automatic" showsVerticalScrollIndicator ={false} showsHorizontalScrollIndicator={false}>
+                    {
+                        selectedItem === '1' &&
+                        <View style={styles.settingsView} >
+                           <Text>Check box here</Text>
+
+
+                        </View>
+                    }
+                    {
+                        selectedItem === '2' &&
+                        <View style={styles.settingsView} >
+                           <Text>Check box here</Text>
+                        </View>
+                    }
+                </ScrollView>
+                </View>
+            </View>
+            <View style={{flexDirection: "row", justifyContent:'space-between'}}>
+                 <View style={{marginRight:15, marginLeft:15, paddingVertical:5, flex: 0.5 }}>
+                    <Button type="clear"  title="Clear Filters"  />
+                </View>
+                <View style={{marginRight:15, marginLeft:15, paddingVertical:5, flex: 0.5 }}>
+                    <Button raised title="Apply" buttonStyle={styles.btnDRed} />
+                </View>
+            </View>
+        </>
+    );
+}
+
+const styles = StyleSheet.create({
+    content: {
+        flexDirection: 'row',
+        flex: 1,
+    },
+    menuColumn: {
+        flex: .35,
+        flexDirection: 'column',
+        backgroundColor:'#dedede',
+    },
+    menuItem: {
+        // flex: 1,
+        flex: 0,
+        //height:hp(8.5),
+        justifyContent: 'center',
+        alignItems: 'center',
+        // alignItems: 'flex-start',
+        // borderWidth:1,
+    },
+    selectedMenuItem: {
+        backgroundColor: 'white',
+        color: '#162da2',
+    },
+
+    menuItemText: {
+        marginLeft: 10,
+        marginRight: 10,
+        alignSelf: 'flex-start',
+        fontSize: 15,
+        fontWeight: 'normal',
+        paddingVertical:16,
+    },
+    // value column -right
+    settingsColumn: {
+        flex: .65,
+        padding: 10,
+        backgroundColor:'white'
+    },
+    btnDRed: {
+        backgroundColor: "#f70000",
+      
+    },
+
+});
+
+export default ProductFilter;
